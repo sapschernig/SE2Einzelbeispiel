@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMatrNrInOrderNoPrime.class);
-        EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
+        EditText editText = (EditText) findViewById(R.id.editTextNumber);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
