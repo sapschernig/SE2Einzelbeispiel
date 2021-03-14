@@ -10,6 +10,7 @@ public class EinzelBspThread  extends Thread{
     public String matrNr;
     public String antwortServer;
 
+    //Konstruktor
     public EinzelBspThread(String matrNr) {
         this.matrNr = matrNr;
     }
@@ -32,26 +33,29 @@ public class EinzelBspThread  extends Thread{
 
     @Override
     public void run() {
-        String matrNr= this.matrNr;
 
-        //BufferedReader inFromUser= new BufferedReader(new InputStreamReader(System.in));
         try {
+            //wie aus VO Folien
+            //BufferedReader inFromUser= new BufferedReader(new InputStreamReader(System.in));
 
             //create client socket, connect to server
             Socket clientSocket= new Socket("se2-isys.aau.at", 53212);
 
-            //Create output stream attached to socket
+            //Create output stream attached to socket, schicke MatrNr zum Server
             DataOutputStream outToServer= new DataOutputStream(clientSocket.getOutputStream());
 
-            //create input stream attached to socket
+            //create input stream attached to socket, gibt mir was zurück
             BufferedReader inFromServer=new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            //sends Matrikelnummer to server
+            //sentence=inFromUser.readLine();
+
+            //sends Matrikelnummer to server, +'\n' damit man weiß es endet
             outToServer.writeBytes(matrNr +'\n');
 
             //reads line from server, saves it in antwortServer
             this.antwortServer=inFromServer.readLine();
 
+            //schließen
             clientSocket.close();
 
         } catch (IOException e){

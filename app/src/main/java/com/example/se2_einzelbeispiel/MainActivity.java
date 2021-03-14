@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
-    Button buttonCalculate;
-    TextView calculateAnswer;
-    EditText editText;
-
-
-    public static final String EXTRA_MESSAGE = "com.example.SE2_Einzelbeispiel.MESSAGE";
+    private Button buttonCalculate;
+    private TextView calculateAnswer;
+    private EditText editText;
+    private Button buttonSend;
+    private TextView serverAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         buttonCalculate=findViewById(R.id.button2);
         calculateAnswer=findViewById(R.id.calculateAnswer);
-
-
+        buttonSend=findViewById(R.id.button);
+        serverAnswer=findViewById(R.id.serverAnswer);
 
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,8 +37,26 @@ public class MainActivity extends AppCompatActivity {
                 calculateAnswer.setText(output);
             }
         });
-    }
 
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText = (EditText) findViewById(R.id.editTextNumber);
+                String input = editText.getText().toString();
+                EinzelBspThread t= new EinzelBspThread(input);
+                t.start();
+                try {
+                    t.join();
+                    serverAnswer.setText(t.getAntwortServer());
+                } catch (InterruptedException e) {
+                    serverAnswer.setText("ERROR");
+                }
+            }
+        });
+
+
+    }
+    //Aufgabe 2/4 - Matrikelnummer sortieren, Primzahlen streichen
     public String calculate(String s){
         ArrayList arrayList=new ArrayList();
         int j=2;
