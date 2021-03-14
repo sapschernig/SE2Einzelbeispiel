@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         buttonSend=findViewById(R.id.button);
         serverAnswer=findViewById(R.id.serverAnswer);
 
+        //Button Berechne
+        /*
+        nimmt MatrNr aus editTextNumber, gibt es in String, speichert in output neuen berechneten String
+        und gibt über TextView calculateAnswer den neuen String aus
+        */
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Button Send
+        /*
+        nimmt MatrNr aus editTextNumber, gibt es in String, Erstellen von thread, thread instanzen starten
+        mit join warten auf Ende eines Threads, sonst ERROR (VO Folie)
+         */
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

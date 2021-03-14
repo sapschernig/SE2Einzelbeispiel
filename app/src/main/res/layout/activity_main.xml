@@ -59,7 +59,7 @@
         android:id="@+id/textView3"
         android:layout_width="82dp"
         android:layout_height="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:text="Berechnung: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

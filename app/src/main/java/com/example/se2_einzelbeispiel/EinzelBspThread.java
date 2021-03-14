@@ -36,7 +36,7 @@ public class EinzelBspThread  extends Thread{
 
         try {
             //wie aus VO Folien
-            //BufferedReader inFromUser= new BufferedReader(new InputStreamReader(System.in));
+            //BufferedReader inFromUser= new BufferedReader(new InputStreamReader(System.in)); -> brauchen wir hier nicht
 
             //create client socket, connect to server
             Socket clientSocket= new Socket("se2-isys.aau.at", 53212);
@@ -47,7 +47,7 @@ public class EinzelBspThread  extends Thread{
             //create input stream attached to socket, gibt mir was zurück
             BufferedReader inFromServer=new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            //sentence=inFromUser.readLine();
+            //sentence=inFromUser.readLine(); -> brauchen wir hier nicht
 
             //sends Matrikelnummer to server, +'\n' damit man weiß es endet
             outToServer.writeBytes(matrNr +'\n');

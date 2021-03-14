@@ -7,6 +7,7 @@ import java.net.Socket;
 
 public class TCPClient {
 
+    //wie in VO Folie
     public static void main(String[] args) throws Exception {
         String sentence;
         String modifiedSentence;
