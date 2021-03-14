@@ -7,15 +7,19 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class EinzelBspThread  extends Thread{
-    public String MatrNr;
+    public String matrNr;
     public String antwortServer;
 
+    public EinzelBspThread(String matrNr) {
+        this.matrNr = matrNr;
+    }
+
     public String getMatrNr() {
-        return MatrNr;
+        return matrNr;
     }
 
     public void setMatrNr(String matrNr) {
-        this.MatrNr = matrNr;
+        this.matrNr = matrNr;
     }
 
     public String getAntwortServer() {
@@ -28,10 +32,13 @@ public class EinzelBspThread  extends Thread{
 
     @Override
     public void run() {
-        Socket clientSocket=null;
+        String matrNr= this.matrNr;
+
+        //BufferedReader inFromUser= new BufferedReader(new InputStreamReader(System.in));
         try {
+
             //create client socket, connect to server
-            clientSocket= new Socket("se2-isys.aau.at", 53212);
+            Socket clientSocket= new Socket("se2-isys.aau.at", 53212);
 
             //Create output stream attached to socket
             DataOutputStream outToServer= new DataOutputStream(clientSocket.getOutputStream());
@@ -40,17 +47,18 @@ public class EinzelBspThread  extends Thread{
             BufferedReader inFromServer=new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             //sends Matrikelnummer to server
-            outToServer.writeBytes(this.MatrNr +'\n');
+            outToServer.writeBytes(matrNr +'\n');
 
             //reads line from server, saves it in antwortServer
             this.antwortServer=inFromServer.readLine();
+
+            clientSocket.close();
 
         } catch (IOException e){
             //throw Exception when not able to connect
             this.antwortServer="ERROR while connecting";
 
-        } finally {
-
         }
     }
+
 }
